@@ -1,6 +1,5 @@
 package xyz.saulmmbp.view.menubar;
 
-import java.awt.Color;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
@@ -88,8 +87,6 @@ public class MenuBar {
         menuBar.add(format);
         menuBar.add(view);
         menuBar.add(help);
-        
-        menuBar.setBackground(Color.BLACK);
         
         return menuBar;
     }
