@@ -6,9 +6,13 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
+import xyz.saulmmbp.view.menubar.MenuBar;
+
 public class MainWindow extends JFrame {
 
     private static final long serialVersionUID = 7062252125155422559L;
+    
+    private MenuBar menuBar = new MenuBar();
 
     /**
      * Constructor de la ventana principal.
@@ -53,6 +57,8 @@ public class MainWindow extends JFrame {
             
         });
         
+        /* Carga la barra de menús */
+        setJMenuBar(menuBar.render());
     }
 
     /*
