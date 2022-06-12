@@ -12,10 +12,6 @@ public class JTextEditorMainApp {
     
     public static void main(String[] args) {
 
-        for(UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-            System.out.println(info.getName() + ", " + info.getClassName());
-        }
-        
         try {
             UIManager.setLookAndFeel(new FlatDarkLaf());
         } catch (Exception e) {

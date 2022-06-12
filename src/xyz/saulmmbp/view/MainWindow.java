@@ -29,7 +29,7 @@ public class MainWindow extends JFrame {
         /* Asigna su estado extendido, es decir, su estado de inicio
          * en este caso maximiza su ancho y su alto 
          */
-        setExtendedState(MAXIMIZED_BOTH);
+//        setExtendedState(MAXIMIZED_BOTH);
         
         /* Inicializa los componentes */
         initComponents();
@@ -58,7 +58,7 @@ public class MainWindow extends JFrame {
         });
         
         /* Carga la barra de menús */
-        setJMenuBar(menuBar.render());
+        setJMenuBar(menuBar.create());
     }
 
     /*
