@@ -6,7 +6,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 
 import xyz.saulmmbp.view.MainWindow;
 
-public class JTextEditorMainApp {
+public class STextEditorMainApp {
     
     private static MainWindow mainWindow;
     

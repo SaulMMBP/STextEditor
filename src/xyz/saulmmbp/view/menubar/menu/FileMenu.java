@@ -5,13 +5,14 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
 import xyz.saulmmbp.actions.ActionListeners;
 
-public class FileMenu implements SMenu {
+public class FileMenu extends JMenu {
 
-    private JMenu menu;
+    private static final long serialVersionUID = -3671420503431903360L;
     
     private JMenuItem nuevo;
     private JMenuItem abrir;
@@ -20,30 +21,22 @@ public class FileMenu implements SMenu {
     private JMenuItem imprimir;
     private JMenuItem salir;
     
-    @Override
-    public JMenu create() {
+    private JSeparator separador0;
+    private JSeparator separador1;
+    private JSeparator separador2;
+
+    public FileMenu() {
         
         /* Configuraciones del Menú */
-        menu = new JMenu();
-        menu.setText("File");
-        menu.setMnemonic('F');
+        setText("Archivo");
+        setMnemonic('A');
 
         /* Inicializando Items */
-        initItems();
+        initComponents();
         
-        /* Agregando Items */
-        menu.add(nuevo);
-        menu.add(abrir);
-        menu.add(guardar);
-        menu.add(guardarComo);
-        menu.add(imprimir);
-        menu.add(salir);
-        
-        return menu;
     }
-
-    @Override
-    public void initItems() {
+    
+    private void initComponents() {
         
         /* inicialización de items */
         nuevo = new JMenuItem();
@@ -52,6 +45,10 @@ public class FileMenu implements SMenu {
         guardarComo = new JMenuItem();
         imprimir = new JMenuItem();
         salir = new JMenuItem();
+        
+        separador0 = new JSeparator();
+        separador1 = new JSeparator();
+        separador2 = new JSeparator();
         
         /* Configuraciones */
             /* Etiqueta */
@@ -78,6 +75,15 @@ public class FileMenu implements SMenu {
             /* Escuchadores de acciones */
         salir.addActionListener(ActionListeners.salir());
         
+        /* Agregando Componentes */
+        add(nuevo);
+        add(abrir);
+        add(separador0);
+        add(guardar);
+        add(guardarComo);
+        add(separador1);
+        add(imprimir);
+        add(separador2);
+        add(salir);
     }
-
 }

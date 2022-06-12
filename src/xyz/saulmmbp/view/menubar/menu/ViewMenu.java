@@ -1,19 +1,29 @@
 package xyz.saulmmbp.view.menubar.menu;
 
 import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 
-public class ViewMenu implements SMenu {
+public class ViewMenu extends JMenu {
 
-    private JMenuItem zoom;
+    private static final long serialVersionUID = -5157897543934844325L;
     
-    @Override
-    public JMenu create() {
-        return null;
+    private JMenu zoom;
+
+    public ViewMenu() {
+        
+        /* Configurando */
+        setText("Ver");
+        setMnemonic('V');
+        
+        /* Inicializando */
+        initComponents();
     }
 
-    @Override
-    public void initItems() {
-    }
+    public void initComponents() {
+        
+        /* Inicializando Submenús */
+        zoom = new ZoomSubmenu();
 
+        /* Agregando Componentes */
+        add(zoom);
+    }
 }
