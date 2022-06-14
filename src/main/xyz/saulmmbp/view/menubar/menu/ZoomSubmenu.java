@@ -7,6 +7,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import xyz.saulmmbp.actions.ActionListeners;
+
 public class ZoomSubmenu extends JMenu {
 
     private static final long serialVersionUID = -8878408576516269629L;
@@ -42,6 +44,10 @@ public class ZoomSubmenu extends JMenu {
             /* Aceleradores */
         acercar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_PLUS, InputEvent.CTRL_DOWN_MASK));
         alejar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_MINUS, InputEvent.CTRL_DOWN_MASK));
+        
+            /* Listeners */
+        acercar.addActionListener(ActionListeners.positiveZoom());
+        alejar.addActionListener(ActionListeners.negativeZoom());
 
         /* Agregando Componentes */
         add(acercar);

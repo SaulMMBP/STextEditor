@@ -4,9 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
 
 import xyz.saulmmbp.view.menubar.SMenuBar;
 
@@ -14,10 +12,17 @@ public class MainWindow extends JFrame {
 
     private static final long serialVersionUID = -3354882865572732093L;
     
-    private JMenuBar menuBar;
-    private JToolBar toolBar;
+    /* Variables Globales */
+    public int editorWidth;
+    public int editorHeight;
+    
+    
+    /* Componentes */
+    private SMenuBar menuBar;
+    private SToolBar toolBar;
     private StateBar stateBar;
     private JScrollPane scrollPane;
+    private Viewport viewport;
 
     public MainWindow() throws HeadlessException {
         
@@ -44,9 +49,11 @@ public class MainWindow extends JFrame {
         toolBar = new SToolBar();
         stateBar = new StateBar();
         scrollPane = new JScrollPane();
+        viewport = new Viewport();
         
         /* Configuraciones */
             /* scrolls */
+        scrollPane.setViewportView(viewport);
         
         /* Agrega Componentes */
         setJMenuBar(menuBar);
@@ -54,4 +61,10 @@ public class MainWindow extends JFrame {
         add(stateBar, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
     }
+    
+    public void zoom(int porcentaje) {
+        viewport.zoom(porcentaje);
+    }
+    
+    
 }

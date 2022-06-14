@@ -8,7 +8,7 @@ import xyz.saulmmbp.view.MainWindow;
 
 public class STextEditorMainApp {
     
-    private static MainWindow mainWindow;
+    public static MainWindow mainWindow;
     
     public static void main(String[] args) {
 
