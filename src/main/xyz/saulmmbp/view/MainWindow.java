@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
 import xyz.saulmmbp.view.menubar.SMenuBar;
+import xyz.saulmmbp.view.viewport.Viewport;
 
 public class MainWindow extends JFrame {
 

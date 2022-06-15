@@ -30,7 +30,7 @@ public class StateBar extends JPanel {
         description = new JLabel();
         
         /* Configurando */
-        description.setText("Puto el que lo lea :)");
+        description.setText("Listo");
         
         /* Agregando componentes */
         add(description);

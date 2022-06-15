@@ -1,4 +1,4 @@
-package xyz.saulmmbp.view;
+package xyz.saulmmbp.view.viewport;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -8,7 +8,8 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
-import javax.swing.text.StyledEditorKit;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.StyledDocument;
 
 public class Viewport extends JPanel {
 
@@ -19,6 +20,10 @@ public class Viewport extends JPanel {
     
     private int width;
     private int height;
+    
+    private StyledDocument styledDoc;
+    private AbstractDocument doc;
+    private final int MAX_CHARACTERS = 300;
     
     private Font font;
     private int fontSize;
@@ -41,8 +46,16 @@ public class Viewport extends JPanel {
         font = new Font(fontType, fontStyle, fontSize);
         width = 794;
         height = 1123;
-        
         editor2 = new JTextPane();
+        styledDoc = editor2.getStyledDocument();
+        
+        try {
+            doc = (AbstractDocument) styledDoc;
+            doc.setDocumentFilter(new DocumentSizeFilter(MAX_CHARACTERS));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         
         /* Configurando */
         editor.setPreferredSize(new Dimension(width, height));
@@ -54,6 +67,8 @@ public class Viewport extends JPanel {
 //        editor2.setPreferredSize(new Dimension(width, height));
         editor2.setBounds(0, 0, 794, 1123);
         editor2.setBackground(Color.WHITE);
+        editor2.setPreferredSize(new Dimension(width, height));
+        editor2.setSize(new Dimension(width, height));
         editor2.setMargin(new Insets(20, 20, 20, 20));
         
         /* Agregando componentes al panel */
