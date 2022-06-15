@@ -3,15 +3,19 @@ package xyz.saulmmbp.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Insets;
 
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.text.StyledEditorKit;
 
 public class Viewport extends JPanel {
 
     private static final long serialVersionUID = -5653757679455030576L;
     
     private JTextArea editor;
+    private JTextPane editor2;
     
     private int width;
     private int height;
@@ -38,6 +42,8 @@ public class Viewport extends JPanel {
         width = 794;
         height = 1123;
         
+        editor2 = new JTextPane();
+        
         /* Configurando */
         editor.setPreferredSize(new Dimension(width, height));
         editor.setBackground(Color.WHITE);
@@ -45,8 +51,13 @@ public class Viewport extends JPanel {
         editor.setWrapStyleWord(true);
         editor.setFont(font);
         
+//        editor2.setPreferredSize(new Dimension(width, height));
+        editor2.setBounds(0, 0, 794, 1123);
+        editor2.setBackground(Color.WHITE);
+        editor2.setMargin(new Insets(20, 20, 20, 20));
+        
         /* Agregando componentes al panel */
-        add(editor);
+        add(editor2);
     }
     
     public void zoom(int porcentaje) {
