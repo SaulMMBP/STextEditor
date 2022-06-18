@@ -19,7 +19,7 @@ public class MainWindow extends JFrame {
     private StateBar stateBar;
     private JScrollPane scrollPane;
     private Viewport viewport;
-
+    
     public MainWindow() throws HeadlessException {
 
         /* Configura la ventana */
@@ -37,6 +37,7 @@ public class MainWindow extends JFrame {
     }
 
     private void initComponents() {
+        
 
         /* Configuración para la acción de cerrar la ventana */
         setDefaultCloseOperation(EXIT_ON_CLOSE);
