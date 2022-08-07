@@ -1,9 +1,17 @@
 package xyz.saulmmbp.view;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -21,7 +29,7 @@ public class MainWindow extends JFrame {
     private JMenuBar menuBar;
     private JToolBar toolBar;
     private JScrollPane scrollPane;
-    private JTextArea textArea;
+    private static JTextArea textArea;
     
     private JMenu menuArchivo;
     private JMenu menuEdicion;
@@ -41,6 +49,11 @@ public class MainWindow extends JFrame {
     private JMenuItem mnItm24;
     private JMenuItem mnItmTamanoPred;
     
+    private JButton btnCopiar;
+    private JButton btnCortar;
+    private JButton btnPegar;
+    
+    private static Font fuentePred;
     
     public MainWindow() throws HeadlessException {
 
@@ -53,6 +66,13 @@ public class MainWindow extends JFrame {
 
         /* Inicializa los componentes */
         initComponents();
+        
+        /* Escuchadores de ventana */
+        addWindowListener(new WindowAdapter() {
+            public void windowOpened(WindowEvent event) {
+                formWindowOpened(event);
+            }
+        });
     }
 
     private void initComponents() {
@@ -81,13 +101,16 @@ public class MainWindow extends JFrame {
         mnItm24 = new JMenuItem();
         mnItmTamanoPred = new JMenuItem();
         
+        btnCopiar = new JButton();
+        btnCortar = new JButton();
+        btnPegar = new JButton();
+        
         /* Configuración de scrollPane */
         scrollPane.setViewportView(textArea);
         
         /* Configuración de textArea */
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
-        
         
         /* Configuración de menus */
         menuArchivo.setText("Archivo");
@@ -108,33 +131,111 @@ public class MainWindow extends JFrame {
         /* Configuración de Items de menú */
         mnItmSalir.setText("Salir");
         mnItmSalir.setMnemonic('S');
+        mnItmSalir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                salirActionPerformed(event);
+            }
+        });
         
         mnItmCortar.setText("Cortar");
         mnItmCortar.setMnemonic('R');
         mnItmCortar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_DOWN_MASK));
+        mnItmCortar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                cortarActionPerformed(event);
+            }
+        });
         
         mnItmCopiar.setText("Copiar");
         mnItmCopiar.setMnemonic('C');
         mnItmCopiar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK));
-
+        mnItmCopiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                copiarActionPerformed(event);
+            }
+        });
+        
         mnItmPegar.setText("Pegar");
         mnItmPegar.setMnemonic('P');
         mnItmPegar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_DOWN_MASK));
+        mnItmPegar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                pegarActionPerformed(event);
+            }
+        });
         
         mnItmCourierNew.setText("Courier New");
         mnItmCourierNew.setMnemonic('C');
+        mnItmCourierNew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                courierNewActionPerformed(event);
+            }
+        });
         
         mnItmArial.setText("Arial");
         mnItmArial.setMnemonic('A');
+        mnItmArial.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                arialActionPerformed(event);
+            }
+        });
         
         mnItmFuentePred.setText("Predeterminada");
         mnItmFuentePred.setMnemonic('P');
+        mnItmFuentePred.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                fuentePredActionPerformed(event);
+            }
+        });
         
         mnItm16.setText("16");
+        mnItm16.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                tamano16ActionPerformed(event);
+            }
+        });
         
         mnItm24.setText("24");
+        mnItm24.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                tamano24ActionPerformed(event);
+            }
+        });
         
         mnItmTamanoPred.setText("Predeterminado");
+        mnItmTamanoPred.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                tamanoPredActionPerformed(event);
+            }
+        });
+        
+        /* Configuración de botones */
+        btnCopiar.setFocusPainted(false);
+        btnCopiar.setToolTipText("Copiar");
+        btnCopiar.setIcon(new ImageIcon(getClass().getResource("/icons/copy.png")));
+        btnCopiar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                copiarActionPerformed(event);
+            }
+        });
+        
+        btnCortar.setFocusPainted(false);
+        btnCortar.setToolTipText("Cortar");
+        btnCortar.setIcon(new ImageIcon(getClass().getResource("/icons/cut.png")));
+        btnCortar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                cortarActionPerformed(event);
+            }
+        });
+        
+        btnPegar.setFocusPainted(false);
+        btnPegar.setToolTipText("Pegar");
+        btnPegar.setIcon(new ImageIcon(getClass().getResource("/icons/paste.png")));
+        btnPegar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                pegarActionPerformed(event);
+            }
+        });
         
         /* añado items a menus y submenus */
         menuArchivo.add(mnItmSalir);
@@ -159,14 +260,121 @@ public class MainWindow extends JFrame {
         menuBar.add(menuEdicion);
         menuBar.add(menuOpciones);
         
-        /* añado componentes a la ventana */
-        add(toolBar);
-        add(scrollPane);
+        /* añado botones a barra de herramientas */
+        toolBar.add(btnCopiar);
+        toolBar.add(btnCortar);
+        toolBar.add(btnPegar);
 
         /* añado barra de menus a la ventana */
         setJMenuBar(menuBar);
 
+        /* añado componentes a la ventana */
+        add(toolBar, BorderLayout.NORTH);
+        add(scrollPane);
+    }
+    
+    /**
+     * Método que responde a eventos de ventana 
+     * @param event
+     */
+    private static void formWindowOpened(WindowEvent event) {
+        /* Enfoca el textArea al abrir la ventana */
+        textArea.requestFocus();
+        
+        /* Almacena la fuente inicial */
+        fuentePred = textArea.getFont();
+    }
+    
+    /**
+     * Método que responde a eventos para terminar la ejecución
+     * @param event
+     */
+    private static void salirActionPerformed(ActionEvent event) {
+        System.exit(0);
+    }
+    
+    /**
+     * Método que responde a eventos para cortar texto
+     * @param event
+     */
+    private static void cortarActionPerformed(ActionEvent event) {
+        textArea.cut();
+    }
+    
+    /**
+     * Método que responde a eventos para copiar texto
+     * @param event
+     */
+    private static void  copiarActionPerformed(ActionEvent event) {
+        textArea.copy();
+    }
+    
+    /**
+     * Método que responde a eventos para pegar texto
+     * @param event
+     */
+    private static void pegarActionPerformed(ActionEvent event) {
+        textArea.paste();
     }
 
+    /**
+     * Método que responde a eventos de cambio de fuente a fuente tipo 'Courier New'
+     * @param event
+     */
+    private static void courierNewActionPerformed(ActionEvent event) {
+        Font fuente = textArea.getFont();
+        fuente = new Font("Courier New", fuente.getStyle(), fuente.getSize());
+        textArea.setFont(fuente);
+    }
+    
+    /**
+     * Método que responde a eventos de cambio de fuente a fuente tipo 'Arial'
+     * @param event
+     */
+    private static void arialActionPerformed(ActionEvent event) {
+        Font fuente = textArea.getFont();
+        fuente = new Font("Arial", fuente.getStyle(), fuente.getSize());
+        textArea.setFont(fuente);
+    }
+    
+    /**
+     * Método que responde a eventos de cambio de fuente a la fuente predeterminada
+     * @param event
+     */
+    private static void fuentePredActionPerformed(ActionEvent event) {
+        Font fuente = textArea.getFont();
+        fuente = new Font(fuentePred.getFamily(), fuente.getStyle(), fuente.getSize());
+        textArea.setFont(fuente);
+    }
+    
+    /**
+     * Método que responde a eventos de cambio de tamaño de fuente a fuente 16
+     * @param event
+     */
+    private static void tamano16ActionPerformed(ActionEvent event) {
+        Font fuente = textArea.getFont();
+        fuente = new Font(fuente.getFamily(), fuente.getStyle(), 16);
+        textArea.setFont(fuente);
+    }
+    
+    /**
+     * Método que responde a eventos de cambio de tamaño de fuente a fuente 24
+     * @param event
+     */
+    private static void tamano24ActionPerformed(ActionEvent event) {
+        Font fuente = textArea.getFont();
+        fuente = new Font(fuente.getFamily(), fuente.getStyle(), 24);
+        textArea.setFont(fuente);
+    }
+    
+    /**
+     * Método que responde a eventos de cambio de tamaño de fuente a la fuente predeterminada
+     * @param event
+     */
+    private static void tamanoPredActionPerformed(ActionEvent event) {
+        Font fuente = textArea.getFont();
+        fuente = new Font(fuente.getFamily(), fuente.getStyle(), fuentePred.getSize());
+        textArea.setFont(fuente);
+    }
 
 }
